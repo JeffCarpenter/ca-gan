@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author: JacobShi777
 
+from __future__ import print_function
 import torch
 import torch.optim as optim
 import torchvision
@@ -188,7 +189,7 @@ def test(epoch, netG, netE, test_data, opt):
 
 
 
-    print str(epoch) + " saved"
+    print(str(epoch) + " saved")
 
 
 def mkdir(dir):

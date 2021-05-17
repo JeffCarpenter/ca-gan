@@ -1,3 +1,4 @@
+from __future__ import print_function
 # with open('list.txt', 'r') as f, open('list1.txt','w') as f1:
 # 	for line in f:
 # 		item = line.split('||')
@@ -37,7 +38,7 @@ with open('list.txt', 'r') as f, open('list_train.txt', 'w') as f1, open('list_t
 			f1.write(alldata[i])
 		else:
 			f2.write(alldata[i].split('||')[0]+'\r\n')
-print 'Finished'
+print('Finished')
 
 
 

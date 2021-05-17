@@ -1,3 +1,4 @@
+from __future__ import print_function
 import cv2
 import torch
 from torch.autograd import Variable
@@ -55,7 +56,7 @@ for i, batch in enumerate(testing_data_loader):
     # cc = (img * 255).astype(np.uint8)
     # cv2.imwrite(output_name_A, cc)
 
-print " saved"
+print(" saved")
 
 
 

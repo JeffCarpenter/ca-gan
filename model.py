@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Author: JacobShi777
 
+from __future__ import print_function
 import torch
 import torch.optim as optim
 import torchvision

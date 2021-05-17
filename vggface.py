@@ -7,6 +7,8 @@
 
 
 from __future__ import print_function
+from builtins import zip
+from builtins import range
 import torch
 import torch.nn.functional as F
 import torch.utils.model_zoo

@@ -2,6 +2,10 @@
 # @Author: JacobShi777
 
 from __future__ import print_function
+from __future__ import division
+from builtins import str
+from builtins import range
+from past.utils import old_div
 import torch
 import torch.optim as optim
 import torchvision
@@ -126,10 +130,10 @@ def train(print_every=10):
             ys = real_s.expand(b,3,w,h)
             _mean = Variable(torch.Tensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1).expand_as(yh)).cuda()
             _var = Variable(torch.Tensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1).expand_as(yh)).cuda()
-            yh = yh / 2 + 0.5
-            ys = ys / 2 + 0.5
-            yh = (yh - _mean) / _var
-            ys = (ys - _mean) / _var
+            yh = old_div(yh, 2) + 0.5
+            ys = old_div(ys, 2) + 0.5
+            yh = old_div((yh - _mean), _var)
+            ys = old_div((ys - _mean), _var)
             loss_recog = perceptual_loss(yh, ys)
 
 
@@ -148,7 +152,7 @@ def train(print_every=10):
             if i % print_every == 0:
                 end_time = time.time()
                 time_delta = usedtime(strat_time, end_time)
-                print('[%s-%d, %5d] D loss: %.3f ; G loss: %.3f' % (time_delta, epoch, i + 1, D_running_loss / print_every, G_running_loss / print_every))
+                print('[%s-%d, %5d] D loss: %.3f ; G loss: %.3f' % (time_delta, epoch, i + 1, old_div(D_running_loss, print_every), old_div(G_running_loss, print_every)))
                 f.write('%d,%d,D_loss:%.5f,GAN_loss:%.5f,L1Loss:%.5f\r\n' % (epoch, i + 1, loss_D.data[0], loss_G_GAN.data[0],loss_G_L1.data[0]))
                 f2.write('%d,%d,loss_recog_loss:%.5f\r\n' % (epoch, i + 1, loss_recog.data[0]))
                 D_running_loss = 0.0

@@ -1,3 +1,5 @@
+from __future__ import division
+from past.utils import old_div
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -73,7 +75,7 @@ class slice_max(nn.Module):
 		super(slice_max, self).__init__()
 		
 	def forward(self, x):
-		size1 = x.size(1)/2
+		size1 = old_div(x.size(1),2)
 		x = torch.split(x, size1, 1)
 		x = torch.max(x[0], x[1])
 		return x	

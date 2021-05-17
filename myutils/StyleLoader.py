@@ -8,12 +8,13 @@
 ## LICENSE file in the root directory of this source tree 
 ##+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+from builtins import object
 import os
 from torch.autograd import Variable
 
 from myutils import utils
 
-class StyleLoader():
+class StyleLoader(object):
 	def __init__(self, style_folder, style_size, cuda=True):
 		self.folder = style_folder
 		self.style_size = style_size

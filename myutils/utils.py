@@ -1,4 +1,7 @@
 from __future__ import print_function
+from __future__ import division
+from builtins import zip
+from past.utils import old_div
 import os
 
 import numpy as np
@@ -20,7 +23,7 @@ def tensor_load_rgbimage(filename, size=None, scale=None, keep_asp=False):
 			img = img.resize((size, size), Image.ANTIALIAS)
 
 	elif scale is not None:
-		img = img.resize((int(img.size[0] / scale), int(img.size[1] / scale)), Image.ANTIALIAS)
+		img = img.resize((int(old_div(img.size[0], scale)), int(old_div(img.size[1], scale))), Image.ANTIALIAS)
 	img = np.array(img).transpose(2, 0, 1)
 	img = torch.from_numpy(img).float()
 	return img
@@ -46,7 +49,7 @@ def gram_matrix(y):
 	(b, ch, h, w) = y.size()
 	features = y.view(b, ch, w * h)
 	features_t = features.transpose(1, 2)
-	gram = features.bmm(features_t) / (ch * h * w)
+	gram = old_div(features.bmm(features_t), (ch * h * w))
 	return gram
 
 

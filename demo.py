@@ -25,6 +25,7 @@ from __future__ import print_function
 # print '======Finished!======='
 
 
+from builtins import range
 import random
 with open('list.txt', 'r') as f, open('list_train.txt', 'w') as f1, open('list_test.txt', 'w') as f2:
 	alldata = []

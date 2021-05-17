@@ -2,6 +2,9 @@
 # @Author: JacobShi777
 
 from __future__ import print_function
+from __future__ import division
+from builtins import range
+from past.utils import old_div
 import torch
 import torch.optim as optim
 import torchvision
@@ -193,7 +196,7 @@ class NLayerDiscriminator(nn.Module):
         self.gpu_ids = gpu_ids
 
         kw = 4
-        padw = int(np.ceil((kw-1)/2))
+        padw = int(np.ceil(old_div((kw-1),2)))
         sequence = [
             # nn.Conv2d(input_nc, ndf, kernel_size=kw, stride=2, padding=padw),
             nn.Conv2d(12, ndf, kernel_size=kw, stride=2, padding=padw),
@@ -465,7 +468,7 @@ class PerceptualLoss(nn.Module):
     def forward(self, g, s):
         loss = 0
 
-        for name, module in self.vgg_layers._modules.items():
+        for name, module in list(self.vgg_layers._modules.items()):
 
             g, s = module(g), module(s)
             if name in self.use_layer:

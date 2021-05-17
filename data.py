@@ -2,6 +2,10 @@
 # @Author: JacobShi777
 
 from __future__ import print_function
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from past.utils import old_div
 import cv2
 import os
 import random
@@ -9,7 +13,7 @@ import numpy as np
 import torch
 import random
 import scipy.io as sio
-import cPickle
+import pickle
 from torch.autograd import Variable
 import torchvision.transforms as transforms
 import torch.utils.data as data
@@ -79,7 +83,7 @@ def load_targets(imgpath, opt, if_train):
     imgpath = os.path.join(opt.root, imgpath)
     img = cv2.imread(imgpath, cv2.IMREAD_GRAYSCALE)
     img = img.astype(np.float32)
-    img = img / 255
+    img = old_div(img, 255)
     img = img.reshape(1, img.shape[0], img.shape[1])
     if if_train:
         # img = cv2.resize(img, (opt.loadSize, opt.loadSize))
@@ -99,8 +103,8 @@ def mat_merge(img, matpath):
 
 def zero_padding(img, size0, pad1, pad2):
     zero_padding = np.zeros((img.shape[0], size0, size0), dtype=np.float32)
-    pad1 = pad1 / 2
-    pad2 = pad2 / 2
+    pad1 = old_div(pad1, 2)
+    pad2 = old_div(pad2, 2)
     zero_padding[:, pad1:size0 - pad1, pad2:size0 - pad2] = img
     return zero_padding
 

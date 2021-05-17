@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 
 import numpy as np
@@ -84,7 +85,7 @@ def preprocess_batch(batch):
 
 def init_vgg16(model_folder):
 	"""load the vgg16 model feature"""
-	print model_folder
+	print(model_folder)
 	if not os.path.exists(os.path.join(model_folder, 'vgg16.weight')):
 		if not os.path.exists(os.path.join(model_folder, 'vgg16.t7')):
 			os.system(
